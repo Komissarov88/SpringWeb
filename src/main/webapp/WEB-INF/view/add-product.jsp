@@ -1,5 +1,4 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
 </head>
@@ -8,13 +7,13 @@
 <a href="${pageContext.request.contextPath}/">Home</a>
 <a href="${pageContext.request.contextPath}/viewProducts">View products</a>
 
-<form:form action="processProductAdd" modelAttribtue="product">
-    Id: <form:input path="id" />
-    <br>
-    Title: <form:input path="title" />
-    <br>
-    Cost: <form:input path="cost" />
-    <br>
+<form:form action="processForm" method="POST" modelAttribtue="product">
+    <form:label path="id">Id</form:label>
+    <form:input path="id" />
+    <form:label path="title">Title</form:label>
+    <form:input path="title" />
+    <form:label path="cost">Cost</form:label>
+    <form:input path="cost" />
     <input type="submit" value="Submit" />
 </form:form>
 

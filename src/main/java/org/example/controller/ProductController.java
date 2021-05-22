@@ -36,8 +36,8 @@ public class ProductController {
         return "add-product";
     }
 
-    @RequestMapping("/processProductAdd")
-    public String processProductAdd(@ModelAttribute("product")Product product) {
+    @RequestMapping("/processForm")
+    public String processForm(@ModelAttribute("product")Product product) {
         productRepository.addProduct(product);
         return "view-products";
     }
