@@ -1,22 +1,20 @@
 package org.example.controller;
 
 import org.example.entity.Product;
-import org.example.repository.ProductRepository;
+import org.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ProductController {
 
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public void setProductService(ProductService productService) {
+        this.productService = productService;
     }
 
     @RequestMapping("/")
@@ -26,11 +24,11 @@ public class ProductController {
 
     @RequestMapping(value = "/viewProducts", method = RequestMethod.GET)
     public String viewProducts(Model uiModel) {
-        uiModel.addAttribute("products", productRepository.getProducts());
+        uiModel.addAttribute("products", productService.getProducts());
         return "view-products";
     }
 
-    @RequestMapping(value = "/addProduct")
+    @RequestMapping("/addProduct")
     public String addProduct(Model uiModel) {
         uiModel.addAttribute("product", new Product());
         return "add-product";
@@ -38,7 +36,7 @@ public class ProductController {
 
     @RequestMapping("/processForm")
     public String processForm(@ModelAttribute("product")Product product) {
-        productRepository.addProduct(product);
-        return "view-products";
+        productService.addProduct(product);
+        return "redirect:viewProducts";
     }
 }
